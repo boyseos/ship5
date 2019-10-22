@@ -9,7 +9,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @EnableWebMvc
-@ComponentScan(basePackages = {"com.ship.web.controller"})
+@ComponentScan(basePackages = {"com.ship.web.cmm"})
 public class ServletConfig implements WebMvcConfigurer{
 	
 	@Override
@@ -23,6 +23,6 @@ public class ServletConfig implements WebMvcConfigurer{
 	
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/resources/**").addResourceLocations("/");
+        registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
     }
 }
