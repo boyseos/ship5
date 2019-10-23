@@ -13,14 +13,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ship.web.cmm.IConsumer;
 import com.ship.web.cmm.IFunction;
-import com.ship.web.usr.User;
 import com.ship.web.utl.Printer;
 
-import lombok.extern.log4j.Log4j;
-
 @RestController
-@RequestMapping("/users")
-@Log4j
+@RequestMapping("/users/**")
+
 public class UserCtrl {
 	private static final Logger logger = LoggerFactory.getLogger(UserCtrl.class);
 	@Autowired User user;
@@ -36,8 +33,8 @@ public class UserCtrl {
 //				userMapper.insertUser(user);
 //			}
 //		};
-		IConsumer<User> xx = x -> userMapper.insertUser(x);
-		xx.accept(user);
+		//IConsumer<User> xx = x -> userMapper.insertUser(x);
+		//xx.accept(user);
 		System.out.println("");
 		Map<String,String> map = new HashMap<>();
 		map.put("xxx","가입성공");
@@ -56,7 +53,6 @@ public class UserCtrl {
 		IFunction<User,User> xx = x -> userMapper.selectUserById(x);
 		IConsumer<String> xy = x -> System.out.println(x);
 		xy.accept("abdc");
-		System.out.println("dfa");
-		return xx.apply(param);
+		return param;
 	}
 }
