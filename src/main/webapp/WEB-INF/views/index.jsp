@@ -21,6 +21,6 @@
 <script src="<%=application.getContextPath()%>/resources/js/cmm/auth.js"></script>
 <script src="<%=application.getContextPath()%>/resources/js/vue/auth_vue.js"></script>
 <script>
-	app.r('/web');
+	app.r('<%=application.getContextPath()%>');
 </script>
 </html>

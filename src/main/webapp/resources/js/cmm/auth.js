@@ -67,16 +67,17 @@ auth =(()=>{
 						age : $('#age').val()
 				}
 				alert('조인 전송아이디 :'+data.uid)
+				alert(_+'  =  ctx')
 				$.ajax({
-					url : _+'/users',
+					url : _+'/users/',
 					type : 'POST',
 					dataType : 'json',
 					data : JSON.stringify(data),
 						//{ uId : $('#uid').val ,uPw : $('#upw)}이 원형태
 					contentType : 'application/json',      //meam
 					success : d => {
-						alert('ajax 조인 성공아이디 : '+ d.uid +
-								'ajax 조인 성공비번: ' + d.upw)
+						alert('ajax 조인 성공아이디 : '+ d.xxx +
+								'ajax 조인 성공비번: ' + d.xxx)
 						login()
 					},
 					error : e => {

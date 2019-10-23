@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ship.web.cmm.IConsumer;
+import com.ship.web.cmm.IFunction;
 import com.ship.web.usr.User;
 import com.ship.web.utl.Printer;
 
@@ -23,23 +25,38 @@ public class UserCtrl {
 	private static final Logger logger = LoggerFactory.getLogger(UserCtrl.class);
 	@Autowired User user;
 	@Autowired Printer printer;
+	@Autowired UserMapper userMapper;
 	
 	@PostMapping("/")
-	public Map<?,?> join(@RequestBody User param) {
-		logger.info("조인 아이디{}",param.getUid() +", "+param.getUpw());
-		printer.accept("람다 조인 아이디 "+param.getUid() + ", "+param.getUpw());
+	public Map<?,?> join(@RequestBody User user) {
+		logger.info("조인 아이디{}",user.getUid() +", "+user.getUpw());
+//		new IConsumer() {
+//			@Override
+//			public void accept(Object o) {
+//				userMapper.insertUser(user);
+//			}
+//		};
+		IConsumer<User> xx = x -> userMapper.insertUser(x);
+		xx.accept(user);
+		System.out.println("");
 		Map<String,String> map = new HashMap<>();
-		map.put("uid",param.getUid());
-		map.put("upw",param.getUpw());
-		logger.info("맵에 담긴 아이디와 비번{}",map.get("uid")+","+map.get("upw"));
+		map.put("xxx","가입성공");
 		return map;
 	}
 	
 	@PostMapping("/login")
 	public User login(@RequestBody User param) {
 		logger.info("AJAX 가 보낸 아이디{}",param.getUid() +", "+param.getUpw());
-//		user = userService.login(param);
-//		logger.info("사용자 정보{}",userService.login(param).toString());
-		return user;
+//		return (new IFunction() {			
+//			@Override
+//			public Object apply(Object o) {
+//				return userMapper.selectUserById(param);
+//			}}).apply(param);
+		//IFunction U = ((x) -> userMapper.selectUserById((User) x));
+		IFunction<User,User> xx = x -> userMapper.selectUserById(x);
+		IConsumer<String> xy = x -> System.out.println(x);
+		xy.accept("abdc");
+		System.out.println("dfa");
+		return xx.apply(param);
 	}
 }

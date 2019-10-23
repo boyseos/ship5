@@ -6,8 +6,8 @@ import com.ship.web.usr.User;
 import org.springframework.stereotype.Repository;
 @Repository
 public interface UserMapper {
-	public void insertUser(User param);
-	public User selectUserById(User param);
+	public void insertUser(User user);
+	public User selectUserById(User user);
 	public List<User> findByDeptTable();
 	public int countUser();
 }
